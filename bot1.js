@@ -18,34 +18,26 @@ bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const messageText = msg.text;
 
-  
-
-  
-  
-  // Obtém a hora atual
-const horaAtual = new Date().toLocaleTimeString();
-if(horaAtual < '09:00' && horaAtual > '18:00')
-{
-    bot.sendMessage(chatId, `https://uvv.br`);
-}
-else
-{
-    bot.sendMessage(chatId, `Horário de funcionamento: 09:00 às 18:00`);
-    bot.sendMessage(chatId, `E-mail: `);
-    
-    // Verifica se a mensagem é um email válido
-  if (isValidEmail(messageText)) {
+  if (isValidEmail(messageText))
+  {
     // Salva o email
     saveEmail(msg.from.id, messageText);
 
     bot.sendMessage(chatId, 'Email salvo com sucesso!');
   } else {
-    bot.sendMessage(chatId, 'O email que você enviou é inválido. Por favor, envie um email válido.');
+    // Obtém a hora atual
+  const horaAtual = new Date().toLocaleTimeString();
+  if(horaAtual < '09:00' && horaAtual > '18:00')
+  {
+      bot.sendMessage(chatId, `https://uvv.br`);
   }
-    
-}
-});
-
+  else
+  {
+      bot.sendMessage(chatId, `Horário de funcionamento: 09:00 às 18:00`);
+      bot.sendMessage(chatId, `E-mail: `);
+  }
+  }
+  });
 
 // Função para verificar se o email é válido
 function isValidEmail(email) {
